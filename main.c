@@ -159,9 +159,9 @@ int main(int argc,char** argv){
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     getTotalTrials(&cnt, my_rank);
-    printf("%d",cnt);
+    printf("%d\n",cnt);
     chores = cnt/comm_sz;
-    printf("%d",chores);
+    printf("%d\n",chores);
     for (int i=0;i<chores;i++){
         int cardCount=0;
         while (cardCount<5){
@@ -179,7 +179,7 @@ int main(int argc,char** argv){
         if (isStraightFlush(pokerHand))
             straightFlushes++;
     }
-    printf("%d",straightFlushes);
+    printf("%d\n",straightFlushes);
     MPI_Reduce(&straightFlushes, &totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
     if(my_rank == 0){
         percent=(float)totalStraights/(float)cnt*100.0;
