@@ -177,6 +177,7 @@ int main(int argc,char** argv){
         if (isStraightFlush(pokerHand))
             straightFlushes++;
     }
+    printf("%d",straightFlushes);
     MPI_Reduce(&straightFlushes, &totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
     if(my_rank == 0){
         percent=(float)totalStraights/(float)cnt*100.0;
