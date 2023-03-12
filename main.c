@@ -159,7 +159,9 @@ int main(int argc,char** argv){
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     getTotalTrials(&cnt, my_rank);
+    printf("%d",cnt);
     chores = cnt/comm_sz;
+    printf("%d",chores);
     for (int i=0;i<chores;i++){
         int cardCount=0;
         while (cardCount<5){
