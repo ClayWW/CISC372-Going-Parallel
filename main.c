@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+#include <mpi.h>
 
 typedef enum {CLUBS=0,SPADES=1,HEARTS=2,DIAMONDS=3} SUIT;
 
@@ -27,9 +29,13 @@ void randomCard(Card* card){
  * Arguments: cnt: an output variable to hold the selected number of trials
  * Returns: None
  */
-void getTotalTrials(int* cnt){
-    printf("Enter the number of trials:\n");
-    scanf("%d",cnt);
+void getTotalTrials(int* cnt, int rank){
+    if(rank == 0){
+        printf("Enter the number of trials:\n");
+        scanf("%d",cnt);
+    }else{
+        MPI_Bcast(&cnt, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    }
  }
 /*inHand
  * Description: checks if a card is in the hand so far
@@ -141,12 +147,20 @@ void makeStraightFlush3(Hand hand){
 }
 int main(int argc,char** argv){
     int straightFlushes=0;
+    int totalStraights;
     float percent;
     Hand pokerHand;
     srand(time(0));
     int cnt;
-    getTotalTrials(&cnt);
-    for (int i=0;i<cnt;i++){
+    int comm_sz;
+    int my_rank;
+    int chores;
+    MPI_Init(NULL, NULL);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    getTotalTrials(&cnt, my_rank);
+    chores = cnt/comm_sz;
+    for (int i=0;i<chores;i++){
         int cardCount=0;
         while (cardCount<5){
             Card card;
@@ -158,13 +172,16 @@ int main(int argc,char** argv){
             }
     }
 #ifdef DEBUG
-    printHand(pokerHand);
+        printHand(pokerHand);
 #endif
-    if (isStraightFlush(pokerHand))
-        straightFlushes++;
+        if (isStraightFlush(pokerHand))
+            straightFlushes++;
     }
-    percent=(float)straightFlushes/(float)cnt*100.0;
-    
-    printf("We found %d straight flushes out of %d hands or %f percent.\n",straightFlushes,cnt,percent);
+    MPI_Reduce(straightFlushes, totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+    if(my_rank == 0){
+        percent=(float)totalStraights/(float)cnt*100.0;
+        printf("We found %d straight flushes out of %d hands or %f percent.\n",totalStraights,cnt,percent);
+    }
+    MPI_Finalize();
     return 0;
 }
