@@ -180,7 +180,8 @@ int main(int argc,char** argv){
             straightFlushes++;
     }
     printf("%d\n",straightFlushes);
-    MPI_Reduce(&straightFlushes, &totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&straightFlushes, &totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD); //ERROR IS HERE
+    printf("gets through reduce");
     if(my_rank == 0){
         percent=(float)totalStraights/(float)cnt*100.0;
         printf("We found %d straight flushes out of %d hands or %f percent.\n",totalStraights,cnt,percent);
