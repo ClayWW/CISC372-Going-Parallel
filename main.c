@@ -150,7 +150,7 @@ int main(int argc,char** argv){
     int totalStraights;
     float percent;
     Hand pokerHand;
-    srand(time(0));
+    srand(time(NULL)+my_rank);
     int cnt;
     int comm_sz;
     int my_rank;
