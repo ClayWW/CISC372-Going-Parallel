@@ -146,8 +146,8 @@ void makeStraightFlush3(Hand hand){
     hand[4].suit=SPADES;
 }
 int main(int argc,char** argv){
-    int straightFlushes=0;
-    int totalStraights;
+    int localFlushes=0;
+    int straighFlushes;
     float percent;
     Hand pokerHand;
     int cnt;
@@ -156,14 +156,12 @@ int main(int argc,char** argv){
     int chores;
     double start;
     double end;
-    srand(time(NULL)+my_rank);
+    srand(time(0));
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     getTotalTrials(&cnt, my_rank);
-    printf("%d\n",cnt);
     chores = cnt/comm_sz;
-    printf("%d\n",chores);
     if(my_rank == 0){
         start = MPI_Wtime();
     }
@@ -182,14 +180,12 @@ int main(int argc,char** argv){
         printHand(pokerHand);
 #endif
         if (isStraightFlush(pokerHand))
-            straightFlushes++;
+            localFlushes++;
     }
-    printf("%d\n",straightFlushes);
-    MPI_Reduce(&straightFlushes, &totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD); //ERROR IS HERE
-    printf("gets through reduce"); 
+    MPI_Reduce(&localFlushes, &straighFlushes, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD); //ERROR IS HERE
     if(my_rank == 0){
-        percent=(float)totalStraights/(float)cnt*100.0;
-        printf("We found %d straight flushes out of %d hands or %f percent.\n",totalStraights,cnt,percent);
+        percent=(float)straighFlushes/(float)cnt*100.0;
+        printf("We found %d straight flushes out of %d hands or %f percent.\n",straighFlushes,cnt,percent);
     }
     if(my_rank == 0){
         end = MPI_Wtime();
