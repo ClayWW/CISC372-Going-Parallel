@@ -1,0 +1,130 @@
+Script started on 2023-03-13 17:51:30-04:00 [TERM="xterm-256color" TTY="/dev/pts/12" COLUMNS="80" LINES="24"]
+clayw@cisc372:~/CISC372-Going-Parallel$ exitsrun -n 16 ./poker[1P8[C[C[C[C[C[C[C[C4[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C1[C[C[C[C[C[C[C[C
+Enter the number of trials:
+1000
+We found 0 straight flushes out of 1000 hands or 0.000000 percent.
+it took 0.000431 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 1 ./poker
+Enter the number of trials:
+10000
+We found 0 straight flushes out of 10000 hands or 0.000000 percent.
+it took 0.003929 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 1 ./poker
+Enter the number of trials:
+100000
+We found 2 straight flushes out of 100000 hands or 0.002000 percent.
+it took 0.027333 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 1 ./poker
+Enter the number of trials:
+1000000
+We found 15 straight flushes out of 1000000 hands or 0.001500 percent.
+it took 0.210875 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 1 ./poker
+Enter the number of trials:
+10000000
+We found 118 straight flushes out of 10000000 hands or 0.001180 percent.
+it took 1.526310 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 1 ./poker[Ksrun -n 1 ./pokerexit[Ksrun -n 16 ./pokerexit[Ksrun -n 1 ./poker[1P ./poker2 ./poker
+Enter the number of trials:
+1000
+We found 0 straight flushes out of 1000 hands or 0.000000 percent.
+it took 0.000196 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 2 ./poker
+Enter the number of trials:
+10000
+We found 0 straight flushes out of 10000 hands or 0.000000 percent.
+it took 0.001426 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 2 ./poker
+Enter the number of trials:
+100000
+We found 0 straight flushes out of 100000 hands or 0.000000 percent.
+it took 0.013605 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 2 ./poker
+Enter the number of trials:
+1000000
+We found 19 straight flushes out of 1000000 hands or 0.001900 percent.
+it took 0.135963 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 2 ./poker
+Enter the number of trials:
+10000000
+We found 158 straight flushes out of 10000000 hands or 0.001580 percent.
+it took 1.356200 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 2 ./poker[1P ./poker4 ./poker
+Enter the number of trials:
+1- 000
+We found 0 straight flushes out of 1000 hands or 0.000000 percent.
+it took 0.000126 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 4 ./poker
+Enter the number of trials:
+10000
+We found 0 straight flushes out of 10000 hands or 0.000000 percent.
+it took 0.000754 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 4 ./poker
+Enter the number of trials:
+100000
+We found 1 straight flushes out of 100000 hands or 0.001000 percent.
+it took 0.006912 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 4 ./poker
+Enter the number of trials:
+1000000
+We found 18 straight flushes out of 1000000 hands or 0.001800 percent.
+it took 0.068984 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 4 ./poker
+Enter the number of trials:
+10000000
+We found 152 straight flushes out of 10000000 hands or 0.001520 percent.
+it took 0.690042 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 4 ./poker[1P ./poker8 ./poker
+Enter the number of trials:
+1000
+We found 0 straight flushes out of 1000 hands or 0.000000 percent.
+it took 0.000097 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 8 ./poker
+Enter the number of trials:
+10000
+We found 0 straight flushes out of 10000 hands or 0.000000 percent.
+it took 0.000470 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 8 ./poker
+Enter the number of trials:
+100000
+We found 1 straight flushes out of 100000 hands or 0.001000 percent.
+it took 0.003901 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 8 ./poker
+Enter the number of trials:
+1000000
+We found 11 straight flushes out of 1000000 hands or 0.001100 percent.
+it took 0.038711 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 8 ./poker
+Enter the number of trials:
+10000000
+We found 150 straight flushes out of 10000000 hands or 0.001500 percent.
+it took 0.382380 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 8 ./poker[1P ./poker1 ./poker6 ./poker
+Enter the number of trials:
+1000
+We found 0 straight flushes out of 1000 hands or 0.000000 percent.
+it took 0.000167 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 16 ./poker
+Enter the number of trials:
+10000
+We found 0 straight flushes out of 10000 hands or 0.000000 percent.
+it took 0.000352 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 16 ./poker
+Enter the number of trials:
+100000
+We found 1 straight flushes out of 100000 hands or 0.001000 percent.
+it took 0.002347 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 16 ./poker
+Enter the number of trials:
+1000000
+We found 10 straight flushes out of 1000000 hands or 0.001000 percent.
+it took 0.022100 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ srun -n 16 ./poker
+Enter the number of trials:
+10000000
+We found 141 straight flushes out of 10000000 hands or 0.001410 percent.
+it took 0.219858 seconds to complete
+clayw@cisc372:~/CISC372-Going-Parallel$ exit
+exit
+
+Script done on 2023-03-13 17:54:07-04:00 [COMMAND_EXIT_CODE="0"]
