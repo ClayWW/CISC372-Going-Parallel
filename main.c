@@ -146,22 +146,25 @@ void makeStraightFlush3(Hand hand){
     hand[4].suit=SPADES;
 }
 int main(int argc,char** argv){
-    int localFlushes=0;
+    int localFlushes;
     int straighFlushes;
     float percent;
     Hand pokerHand;
     int cnt;
+
     int comm_sz;
     int my_rank;
     int chores;
     double start;
     double end;
-    srand(time(0));
+
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    srand(time(0));
     getTotalTrials(&cnt, my_rank);
     chores = cnt/comm_sz;
+    localFlushes = 0;
     if(my_rank == 0){
         start = MPI_Wtime();
     }
