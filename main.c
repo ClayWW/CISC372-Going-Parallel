@@ -157,12 +157,13 @@ int main(int argc,char** argv){
     int chores;
     double start;
     double end;
-
+    printf("gets to init");
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     srand(time(0));
     getTotalTrials(&cnt, my_rank);
+    printf("gets through total trials");
     chores = cnt/comm_sz;
     localFlushes = 0;
     /*
@@ -170,6 +171,7 @@ int main(int argc,char** argv){
         start = MPI_Wtime();
     }
     */
+   printf("gets to for loop");
     for (int i=0;i<chores;i++){
         int cardCount=0;
         while (cardCount<5){
