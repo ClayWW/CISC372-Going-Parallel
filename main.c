@@ -34,7 +34,7 @@ void getTotalTrials(int* cnt, int rank){
         printf("Enter the number of trials:\n");
         scanf("%d",cnt);
     }else{
-        MPI_Bcast(&cnt, 1, MPI_INT, 0, MPI_COMM_WORLD);
+        MPI_Bcast(cnt, 1, MPI_INT, 0, MPI_COMM_WORLD);
     }
  }
 /*inHand
@@ -154,14 +154,19 @@ int main(int argc,char** argv){
     int comm_sz;
     int my_rank;
     int chores;
+    double start;
+    double end;
     srand(time(NULL)+my_rank);
-    MPI_Init(NULL, NULL);
+    MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     getTotalTrials(&cnt, my_rank);
     printf("%d\n",cnt);
     chores = cnt/comm_sz;
     printf("%d\n",chores);
+    if(my_rank == 0){
+        start = MPI_Wtime();
+    }
     for (int i=0;i<chores;i++){
         int cardCount=0;
         while (cardCount<5){
@@ -181,10 +186,14 @@ int main(int argc,char** argv){
     }
     printf("%d\n",straightFlushes);
     MPI_Reduce(&straightFlushes, &totalStraights, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD); //ERROR IS HERE
-    printf("gets through reduce");
+    printf("gets through reduce"); 
     if(my_rank == 0){
         percent=(float)totalStraights/(float)cnt*100.0;
         printf("We found %d straight flushes out of %d hands or %f percent.\n",totalStraights,cnt,percent);
+    }
+    if(my_rank == 0){
+        end = MPI_Wtime();
+        printf("it took %1.6f seconds to complete\n",end-start);
     }
     MPI_Finalize();
     return 0;
