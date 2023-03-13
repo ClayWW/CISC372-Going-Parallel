@@ -33,9 +33,8 @@ void getTotalTrials(int* cnt, int rank){
     if(rank == 0){
         printf("Enter the number of trials:\n");
         scanf("%d",cnt);
-    }else{
-        MPI_Bcast(cnt, 1, MPI_INT, 0, MPI_COMM_WORLD);
     }
+    MPI_Bcast(cnt,1,MPI_INT,0,MPI_COMM_WORLD);
  }
 /*inHand
  * Description: checks if a card is in the hand so far
