@@ -187,8 +187,9 @@ int main(int argc,char** argv){
         if (isStraightFlush(pokerHand))
             localFlushes++;
     }
+    printf("gets to MPI_reduce");
     MPI_Reduce(&localFlushes,&straighFlushes,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD); //ERROR IS HERE
-    
+    printf("gets through MPI reduced");
     if(my_rank == 0){
         percent=(float)straighFlushes/(float)cnt*100.0;
         printf("We found %d straight flushes out of %d hands or %f percent.\n",straighFlushes,cnt,percent);
