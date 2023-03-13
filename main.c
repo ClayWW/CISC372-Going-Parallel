@@ -156,21 +156,16 @@ int main(int argc,char** argv){
     int chores;
     double start;
     double end;
-    printf("gets to init");
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     srand(time(0));
     getTotalTrials(&cnt, my_rank);
-    printf("gets through total trials");
     chores = cnt/comm_sz;
     localFlushes = 0;
-    /*
     if(my_rank == 0){
         start = MPI_Wtime();
     }
-    */
-   printf("gets to for loop");
     for (int i=0;i<chores;i++){
         int cardCount=0;
         while (cardCount<5){
@@ -188,19 +183,15 @@ int main(int argc,char** argv){
         if (isStraightFlush(pokerHand))
             localFlushes++;
     }
-    printf("gets to MPI_reduce");
-    MPI_Reduce(&localFlushes,&straighFlushes,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD); //ERROR IS HERE
-    printf("gets through MPI reduced");
+    MPI_Reduce(&localFlushes,&straighFlushes,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
     if(my_rank == 0){
         percent=(float)straighFlushes/(float)cnt*100.0;
         printf("We found %d straight flushes out of %d hands or %f percent.\n",straighFlushes,cnt,percent);
     }
-    /*
     if(my_rank == 0){
         end = MPI_Wtime();
         printf("it took %1.6f seconds to complete\n",end-start);
     }
-    */
     MPI_Finalize();
     return 0;
 }
